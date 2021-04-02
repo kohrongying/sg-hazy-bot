@@ -2,7 +2,7 @@ import json
 
 def lambda_handler(event, context):
     body = {
-        "message": "Test123",
+        "message": "Test123456",
         "input": event
     }
 
