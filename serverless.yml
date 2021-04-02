@@ -12,17 +12,13 @@ provider:
 #    variable1: value1
 
 # you can add packaging information here
-#package:
-#  patterns:
-#    - '!exclude-me.py'
-#    - '!exclude-me-dir/**'
-#    - include-me.py
-#    - include-me-dir/**
+package:
+ patterns:
+   - '!.github/**'
+   - '!terraform/**'
+   - ./*.py
 
 functions:
   main:
     handler: lambda_function.lambda_handler
     name: lambda-sg-hazy-bot
-#    Define function environment variables here
-#    environment:
-#      variable2: value2

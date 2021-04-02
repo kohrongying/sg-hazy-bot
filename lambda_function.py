@@ -2,7 +2,7 @@ import json
 
 def lambda_handler(event, context):
     body = {
-        "message": "Testing github action! Your function executed successfully!",
+        "message": "Test123",
         "input": event
     }
 

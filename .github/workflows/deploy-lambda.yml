@@ -9,7 +9,6 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./src
     strategy:
       matrix:
         node-version: [14.x]
