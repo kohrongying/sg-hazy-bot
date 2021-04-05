@@ -9,7 +9,7 @@ resource "aws_lambda_function" "this" {
   handler       = "lambda_function.lambda_handler"
   filename      = "index.zip"
   source_code_hash = filebase64sha256("index.zip")
-
+  layers = [aws_lambda_layer_version.this.arn]
   environment {
     variables = {
       foo = "bar"
