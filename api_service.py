@@ -57,6 +57,3 @@ def main():
     pm25 = get_pm25_twenty_four_hourly(response)
     last_updated_time = get_last_updated_time(response)
     return format_response(psi, pm25, last_updated_time)
-
-
-print(main())

@@ -1,6 +1,7 @@
 from unittest import TestCase
 from unittest.mock import patch
-from api_service import make_request, get_psi_twenty_four_hourly, get_pm25_twenty_four_hourly, get_last_updated_time, format_line, format_response
+from api_service import make_request, get_psi_twenty_four_hourly, get_pm25_twenty_four_hourly, get_last_updated_time, \
+    format_line, format_response, main
 
 import json
 
@@ -42,13 +43,12 @@ class ApiServeTest(TestCase):
         self.assertEqual('| west    | 40    | 10    |',
                          format_line('west', 40, 10))
 
-
     def test_format_response(self):
         psi = get_psi_twenty_four_hourly(mock_response)
         pm25 = get_pm25_twenty_four_hourly(mock_response)
         updated_time = get_last_updated_time(mock_response)
         self.assertEqual(
-"""
+            """
 <pre>
 | Area    | PSI   | PM2.5 | 
 |---------|-------|-------|
@@ -60,5 +60,4 @@ class ApiServeTest(TestCase):
 </pre>
 <em>Last updated on 04 Apr 2021 16:08:53 SGT</em>
     """, format_response(psi, pm25, updated_time))
-
 

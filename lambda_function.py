@@ -1,11 +1,16 @@
 import json
-
+from api_service import main
 
 def lambda_handler(event, context):
+    update = json.loads(event['body'])
+
     body = {
-        "message": "Test123456",
+        'method': 'sendMessage',
+        'chat_id': update['message']['chat']['id'],
+        'parse_mode': 'Markdown',
+        'text': main(),
     }
-    print(event)
+
     response = {
         "statusCode": 200,
         "body": json.dumps(body)
