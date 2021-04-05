@@ -4,14 +4,13 @@ on:
     branches:
       - main
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
     defaults:
       run:
         shell: bash
     strategy:
       matrix:
-        node-version: [14.x]
         python-version: [3.8]
     steps:
       - uses: actions/checkout@v2
@@ -19,18 +18,30 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Create and start virtualenv
-        run: |
-          python -m venv venv
       - name: Install dependencies
         run: |
-          source venv/bin/activate
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Run tests
         run: |
-          source venv/bin/activate
           python -m unittest tests/*.py
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+      defaults:
+        run:
+          shell: bash
+      strategy:
+        matrix:
+          node-version: [14.x]
+      - uses: actions/checkout@v2
+      - name: Set up node ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+          with:
+            node-version: ${{ matrix.node }}
+      - name: Install dependencies
+        run: |
+          npm install
       - name: serverless deploy
         uses: serverless/github-action@master
         with:
