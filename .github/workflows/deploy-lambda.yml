@@ -26,10 +26,13 @@ jobs:
       - name: Run tests
         run: |
           python -m unittest tests/*.py
-      - name: serverless deploy
-        uses: serverless/github-action@master
+      - name: Deploy code to Lambda
+        uses: kohrongying/py-lambda-action@master
         with:
-          args: deploy function -f main
+          lambda_layer_arn: 'arn:aws:lambda:ap-southeast-1:163368111864:layer:lambda-layer-python38-requests'
+          lambda_function_name: 'lambda-sg-hazy-bot'
+          exclude_files: 'tests .github terraform serverless.yml'
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: 'ap-southeast-1'
