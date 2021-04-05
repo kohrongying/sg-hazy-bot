@@ -28,12 +28,13 @@ jobs:
   deploy:
     needs: test
     runs-on: ubuntu-latest
-      defaults:
-        run:
-          shell: bash
-      strategy:
-        matrix:
-          node-version: [14.x]
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
       - uses: actions/checkout@v2
       - name: Set up node ${{ matrix.node-version }}
         uses: actions/setup-node@v2
