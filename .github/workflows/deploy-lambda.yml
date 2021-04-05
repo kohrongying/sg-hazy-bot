@@ -21,10 +21,10 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Create and start virtualenv
         run: |
-          python -m venv venv --no-site-packages
-          source venv/bin/activate
+          python -m venv venv
       - name: Install dependencies
         run: |
+          source venv/bin/activate
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           ls venv/lib/python3.8/site-packages
