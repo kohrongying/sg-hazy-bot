@@ -85,3 +85,6 @@ fabric.properties
 
 ### Node ###
 node_modules
+
+.idea/.gitignore
+.DS_Store
