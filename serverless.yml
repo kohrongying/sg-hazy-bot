@@ -17,6 +17,7 @@ package:
    - '!.github/**'
    - '!terraform/**'
    - ./*.py
+   - ./venv
 
 functions:
   main:
