@@ -7,6 +7,9 @@ provider:
   lambdaHashingVersion: 20201221
   stage: dev
   region: ap-southeast-1
+# you can define service wide environment variables here
+#  environment:
+#    variable1: value1
 
 # you can add packaging information here
 package:
@@ -14,10 +17,9 @@ package:
    - '!.github/**'
    - '!terraform/**'
    - ./*.py
+   - ./venv
 
 functions:
   main:
     handler: lambda_function.lambda_handler
     name: lambda-sg-hazy-bot
-plugins:
-  - serverless-python-requirements
