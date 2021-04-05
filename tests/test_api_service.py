@@ -2,10 +2,11 @@ from unittest import TestCase
 from unittest.mock import patch
 from api_service import make_request, get_psi_twenty_four_hourly, get_pm25_twenty_four_hourly, get_last_updated_time, \
     format_line, format_response, main
-
+from pathlib import Path
 import json
 
-with open('sample_response.json') as f:
+sample_response_filepath = Path.cwd() / "tests/sample_response.json"
+with open(sample_response_filepath) as f:
     mock_response = json.load(f)
 
 
