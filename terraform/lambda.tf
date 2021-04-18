@@ -17,11 +17,23 @@ resource "aws_lambda_function" "this" {
   }
 
   lifecycle {
-    ignore_changes = [source_code_hash]
+    ignore_changes = [source_code_hash, layers]
   }
 }
 
 resource "aws_cloudwatch_log_group" "example" {
   name              = "/aws/lambda/${local.lambda_function_name}"
   retention_in_days = 14
+}
+
+resource "aws_lambda_alias" "dev_alias" {
+  name             = "dev"
+  function_name    = aws_lambda_function.this.arn
+  function_version = "$LATEST"
+}
+
+resource "aws_lambda_alias" "prod_alias" {
+  name             = "prod"
+  function_name    = aws_lambda_function.this.arn
+  function_version = "2"
 }
