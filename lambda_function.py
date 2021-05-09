@@ -1,10 +1,13 @@
 import json
+import base 64
 from api_service import main
 
 
 def lambda_handler(event, context):
-    update = json.loads(event['body'])
-
+    decoded_body = base64.b64decode(event['body'])
+    print(decoded_body)
+    update = json.loads(decoded_body)
+    
     body = {
         'method': 'sendMessage',
         'chat_id': update['message']['chat']['id'],
