@@ -12,7 +12,7 @@ resource "aws_lambda_function" "this" {
   layers = [aws_lambda_layer_version.this.arn]
   environment {
     variables = {
-      foo = "bar"
+      DYNAMIC_MAP_BASE_URL = "https://9t8nsozjxf.execute-api.ap-southeast-1.amazonaws.com/dev/haze-map"
     }
   }
 
@@ -36,4 +36,7 @@ resource "aws_lambda_alias" "prod_alias" {
   name             = "prod"
   function_name    = aws_lambda_function.this.arn
   function_version = "2"
+  lifecycle {
+    ignore_changes = [function_version]
+  }
 }
