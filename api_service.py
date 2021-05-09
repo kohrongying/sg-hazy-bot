@@ -1,5 +1,6 @@
 import requests
 import datetime
+import os
 
 BASE_URL = "https://api.data.gov.sg/v1/environment/psi"
 
@@ -40,8 +41,19 @@ def format_response(psi, pm25, updated_time):
     response += f"""
 </pre>
 <em>Last updated on {updated_time}</em>
+<a href="{os.getenv('DYNAMIC_MAP_BASE_URL')}{build_query_params(psi)}">&#8205;</a>
     """
     return response
+
+
+def build_query_params(psi):
+    query_string = "?"
+    for area in psi:
+        if area != "national":
+            query_string += f'{area}={psi[area]}&'
+    if len(query_string) == 1:
+        return ""
+    return query_string[:-1]
 
 
 def format_line(area, psi, pm25):

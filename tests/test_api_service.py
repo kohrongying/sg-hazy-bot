@@ -1,9 +1,10 @@
 from unittest import TestCase
 from unittest.mock import patch
 from api_service import make_request, get_psi_twenty_four_hourly, get_pm25_twenty_four_hourly, get_last_updated_time, \
-    format_line, format_response, main
+    format_line, format_response, build_query_params
 from pathlib import Path
 import json
+import os
 
 sample_response_filepath = Path.cwd() / "tests/sample_response.json"
 with open(sample_response_filepath) as f:
@@ -48,6 +49,7 @@ class ApiServeTest(TestCase):
         psi = get_psi_twenty_four_hourly(mock_response)
         pm25 = get_pm25_twenty_four_hourly(mock_response)
         updated_time = get_last_updated_time(mock_response)
+        os.environ["DYNAMIC_MAP_BASE_URL"] = "https://example.com"
         self.assertEqual(
             """
 <pre>
@@ -60,5 +62,12 @@ class ApiServeTest(TestCase):
 | north   | 52    | 13    |
 </pre>
 <em>Last updated on 04 Apr 2021 16:08:53 SGT</em>
+<a href="https://example.com?west=40&east=42&central=49&south=41&north=52">&#8205;</a>
     """, format_response(psi, pm25, updated_time))
 
+    def test_build_query_params(self):
+        psi = get_psi_twenty_four_hourly(mock_response)
+        self.assertEqual("?west=40&east=42&central=49&south=41&north=52", build_query_params(psi))
+
+    def test_build_query_params_with_empty_response(self):
+        self.assertEqual("", build_query_params({}))
