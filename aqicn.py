@@ -1,7 +1,8 @@
 import requests
 import os
 from shared import Reading, format_line, build_query_params
-
+import datetime
+from zoneinfo import ZoneInfo
 
 CITY = "singapore"
 BASE_URL = f"https://api.waqi.info/feed/{CITY}"
@@ -32,11 +33,24 @@ def get_aqicn_readings():
     return readings
 
 
+def get_time(response):
+    if not response:
+        return None
+    iso = response.get("data", {}).get("time", {}).get("iso", None)
+    dt_utc = datetime.datetime.fromisoformat(iso) if iso else None
+
+    if not dt_utc:
+        return None
+    dt_sgt = dt_utc.astimezone(ZoneInfo("Asia/Singapore"))
+    return f"{dt_sgt.strftime('%d %b %Y %H:%M:%S')} SGT"
+
 def format_aqicn_response() -> str:
     readings = get_aqicn_readings()
-
+    resp = make_request(urls[0])  # Get the first region's response to extract the time
     response = f"""
 <pre>
+<b>Air Quality Index (AQI) Readings for {CITY.capitalize()}</b>
+<em>Last updated on {get_time(resp)}:</em>
 | Area    | PSI   | PM2.5 | 
 |---------|-------|-------|"""
     for reading in readings:
@@ -44,6 +58,7 @@ def format_aqicn_response() -> str:
 
     response += f"""
 </pre>
+See map of PM2.5 readings
 <a href="{os.getenv("DYNAMIC_MAP_BASE_URL")}{build_query_params(readings)}">&#8205;</a>
     """
     return response

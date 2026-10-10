@@ -42,6 +42,8 @@ def format_nea_response() -> str:
 
     response = f"""
 <pre>
+<b>NEA Air Quality Forecast for Singapore</b>
+<em>Last updated on {last_updated_time}</em>
 | Area    | PSI   | PM2.5 | 
 |---------|-------|-------|"""
     for reading in readings:
@@ -49,7 +51,7 @@ def format_nea_response() -> str:
 
     response += f"""
 </pre>
-<em>Last updated on {last_updated_time}</em>
+See map of PSI readings
 <a href="{os.getenv("DYNAMIC_MAP_BASE_URL")}{build_query_params(readings, 'psi')}">&#8205;</a>
     """
     return response

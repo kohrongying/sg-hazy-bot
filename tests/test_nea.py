@@ -29,6 +29,8 @@ class NeaTest(TestCase):
         self.assertEqual(
             """
 <pre>
+<b>NEA Air Quality Forecast for Singapore</b>
+<em>Last updated on 04 Apr 2021 16:08:53 SGT</em>
 | Area    | PSI   | PM2.5 | 
 |---------|-------|-------|
 | north   | 52    | 13    |
@@ -37,6 +39,6 @@ class NeaTest(TestCase):
 | west    | 40    | 10    |
 | central | 49    | 12    |
 </pre>
-<em>Last updated on 04 Apr 2021 16:08:53 SGT</em>
+See map of PSI readings
 <a href="https://example.com?north=52&south=41&east=42&west=40&central=49">&#8205;</a>
     """, response)

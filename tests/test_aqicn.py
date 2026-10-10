@@ -20,6 +20,8 @@ class AqicnTest(TestCase):
         self.assertEqual(
             """
 <pre>
+<b>Air Quality Index (AQI) Readings for Singapore</b>
+<em>Last updated on 10 Oct 2026 17:00:00 SGT:</em>
 | Area    | PSI   | PM2.5 | 
 |---------|-------|-------|
 | north   | None  | 183   |
@@ -28,5 +30,6 @@ class AqicnTest(TestCase):
 | west    | None  | 183   |
 | central | None  | 183   |
 </pre>
+See map of PM2.5 readings
 <a href="https://example.com?north=183&south=183&east=183&west=183&central=183">&#8205;</a>
     """, response)
