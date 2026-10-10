@@ -41,9 +41,9 @@ def format_nea_response() -> str:
     last_updated_time = get_last_updated_time(response)
 
     response = f"""
-<pre>
 <b>NEA Air Quality Forecast for Singapore</b>
 <em>Last updated on {last_updated_time}</em>
+<pre>
 | Area    | PSI   | PM2.5 | 
 |---------|-------|-------|"""
     for reading in readings:

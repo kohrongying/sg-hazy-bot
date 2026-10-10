@@ -48,9 +48,9 @@ def format_aqicn_response() -> str:
     readings = get_aqicn_readings()
     resp = make_request(urls[0])  # Get the first region's response to extract the time
     response = f"""
-<pre>
 <b>Air Quality Index (AQI) Readings for {CITY.capitalize()}</b>
 <em>Last updated on {get_time(resp)}:</em>
+<pre>
 | Area    | PSI   | PM2.5 | 
 |---------|-------|-------|"""
     for reading in readings:

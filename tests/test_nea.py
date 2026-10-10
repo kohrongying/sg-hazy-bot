@@ -28,9 +28,9 @@ class NeaTest(TestCase):
             response = format_nea_response()
         self.assertEqual(
             """
-<pre>
 <b>NEA Air Quality Forecast for Singapore</b>
 <em>Last updated on 04 Apr 2021 16:08:53 SGT</em>
+<pre>
 | Area    | PSI   | PM2.5 | 
 |---------|-------|-------|
 | north   | 52    | 13    |

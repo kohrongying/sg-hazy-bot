@@ -19,9 +19,9 @@ class AqicnTest(TestCase):
             response = format_aqicn_response()
         self.assertEqual(
             """
-<pre>
 <b>Air Quality Index (AQI) Readings for Singapore</b>
 <em>Last updated on 10 Oct 2026 17:00:00 SGT:</em>
+<pre>
 | Area    | PSI   | PM2.5 | 
 |---------|-------|-------|
 | north   | None  | 183   |
