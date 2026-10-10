@@ -1,0 +1,72 @@
+{
+	"status": "ok",
+	"data": {
+		"aqi": 183,
+		"idx": 1664,
+		"attributions": [
+			{
+				"url": "http://nea.gov.sg/",
+				"name": "NEA - Singapore National Environment Agency"
+			},
+			{
+				"url": "https://waqi.info/",
+				"name": "World Air Quality Index Project"
+			}
+		],
+		"city": {
+			"geo": [
+				1.3645924,
+				103.9477547
+			],
+			"name": "East, Singapore",
+			"url": "https://aqicn.org/city/singapore/east",
+			"location": ""
+		},
+		"dominentpol": "pm25",
+		"iaqi": {
+			"co": {
+				"v": 11
+			},
+			"dew": {
+				"v": 24
+			},
+			"h": {
+				"v": 74
+			},
+			"o3": {
+				"v": 32
+			},
+			"p": {
+				"v": 1006
+			},
+			"pm10": {
+				"v": 100
+			},
+			"pm25": {
+				"v": 183
+			},
+			"so2": {
+				"v": 2
+			},
+			"t": {
+				"v": 29
+			},
+			"w": {
+				"v": 4.1
+			},
+			"wg": {
+				"v": 8.2
+			}
+		},
+		"time": {
+			"s": "2026-10-10 17:00:00",
+			"tz": "+08:00",
+			"v": 1791651600,
+			"iso": "2026-10-10T17:00:00+08:00"
+		},
+		"forecast": {},
+		"debug": {
+			"sync": "2026-10-10T18:09:09+09:00"
+		}
+	}
+}
