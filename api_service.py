@@ -13,15 +13,15 @@ def make_request():
         return None
 
 
-def get_psi_twenty_four_hourly(response):
+def get_psi_twenty_four_hourly(response) -> dict:
     return response['items'][0]['readings']['psi_twenty_four_hourly']
 
 
-def get_pm25_twenty_four_hourly(response):
+def get_pm25_twenty_four_hourly(response) -> dict:
     return response['items'][0]['readings']['pm25_twenty_four_hourly']
 
 
-def get_last_updated_time(response):
+def get_last_updated_time(response) -> str:
     timestamp = response['items'][0]['update_timestamp']
     datetime_obj = datetime.datetime.strptime(timestamp, '%Y-%m-%dT%H:%M:%S%z')
     return f"{datetime_obj.strftime('%d %b %Y %H:%M:%S')} SGT"
@@ -32,8 +32,9 @@ def format_response(psi, pm25, updated_time):
 <pre>
 | Area    | PSI   | PM2.5 | 
 |---------|-------|-------|"""
-    for area in psi:
-        if area != "national":
+    areas = ['north', 'south', 'east', 'west', 'central']
+    for area in areas:
+        if area in psi and area in pm25:
             psi_reading = psi[area]
             pm25_reading = pm25[area]
             response += f'\n{format_line(area, psi_reading, pm25_reading)}'

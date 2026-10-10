@@ -55,11 +55,11 @@ class ApiServeTest(TestCase):
 <pre>
 | Area    | PSI   | PM2.5 | 
 |---------|-------|-------|
-| west    | 40    | 10    |
-| east    | 42    | 10    |
-| central | 49    | 12    |
-| south   | 41    | 10    |
 | north   | 52    | 13    |
+| south   | 41    | 10    |
+| east    | 42    | 10    |
+| west    | 40    | 10    |
+| central | 49    | 12    |
 </pre>
 <em>Last updated on 04 Apr 2021 16:08:53 SGT</em>
 <a href="https://example.com?west=40&east=42&central=49&south=41&north=52">&#8205;</a>
