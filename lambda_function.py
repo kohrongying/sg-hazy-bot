@@ -5,7 +5,6 @@ from api_service import main
 
 def lambda_handler(event, context):
     decoded_body = base64.b64decode(event['body'])
-    print(decoded_body)
     update = json.loads(decoded_body)
     
     body = {

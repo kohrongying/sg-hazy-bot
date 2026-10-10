@@ -1,0 +1,59 @@
+name: Deploy to AWS Lambda
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write   # REQUIRED for OIDC
+  contents: read
+
+jobs:
+  deploy:
+    environment: production
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout repo
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Set up Python
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+
+      - name: Install dependencies
+        run: uv sync --locked --all-extras
+
+      - name: Run tests
+        run: uv run python -m unittest tests/*.py
+
+      # 4. Copy project files into package folder
+      - name: Copy project files
+        run: |
+          mkdir -p package
+          cp *.py package/
+
+      # 5. Create deployment ZIP
+      - name: Zip deployment package
+        run: |
+          cd package
+          zip -r ../lambda_deploy.zip .
+          cd ..
+
+      # 6. Configure AWS credentials using OIDC
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::163368111864:role/role-githubdeploy-sghazybot
+          aws-region: ap-southeast-1
+
+      # 7. Deploy to AWS Lambda
+      - name: Deploy to Lambda
+        run : |
+          aws lambda update-function-code \
+            --function-name ${{ secrets.LAMBDA_FUNCTION_NAME }} \
+            --zip-file fileb://lambda_deploy.zip
